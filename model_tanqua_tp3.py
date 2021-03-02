@@ -4,6 +4,10 @@ import matplotlib.pyplot as plt
 from math import *
 import scipy.signal as signal
 import random
+from random import choice
+###bib a parte
+####!pip install DeCida
+from decida.Pattern import Pattern
 #para reprodução do mesmo experimento setando a semente que garante gerar a mesma sequancia para execuçoes diferentes
 random.seed(1234)
 
@@ -60,6 +64,19 @@ def rkTanQua(x0, uv1, uv2, h, t):
         result_x[i] = savex0[i] + (phi[i] + xd[i]) * h / 6
 
     return result_x
+
+def prbs():
+    while True:
+    yield choice([False, True])
+
+def acf_pacf(x):
+    fig = plt.figure(figsize=(16,10))
+    ax1 = fig.add_subplot(221)
+    fig = sm.graphics.tsa.plot_acf(x, lags=40, ax=ax1)
+    ax2 = fig.add_subplot(222)
+    fig = sm.graphics.tsa.plot_pacf(x, lags=40, ax=ax2)
+    acf_pacf(rs_ar1)
+
 
 #função para plotar os resultados
 def plotsignals(signals,ref,t, name_input,init_):
